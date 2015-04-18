@@ -24,9 +24,9 @@ window.onload = function init()
 
             document.onclick = function (event) { AddShape(event); };
 
-            document.getElementById("pryamids").onclick = function (event) { ChangeToTriangle(event); };
-            document.getElementById("sphere").onclick = function (event) { ChangeToSphere(event); };
-            document.getElementById("cubes").onclick = function (event) { ChangeToCube(event); };
+            //document.getElementById("pryamids").onclick = function (event) { ChangeToTriangle(event); };
+            //document.getElementById("sphere").onclick = function (event) { ChangeToSphere(event); };
+            //document.getElementById("cubes").onclick = function (event) { ChangeToCube(event); };
             
 
             render();
@@ -38,7 +38,7 @@ window.onload = function init()
 function AddShape(event)
 {
     //TODO: depending what button was last pressed via flag and switch 
-    switch(flag)
+    /* switch(flag)
     {
         case"s":
             break;
@@ -47,7 +47,22 @@ function AddShape(event)
         case"p":
             break;
     }
-  
+    */
+    
+    var cursorX = event.clientX;
+    var cursorY = event.clientY;
+    console.log(cursorX);
+    console.log(cursorY);
+    // X ranges from 0 to 1348, Y ranges from 0 to 675
+    var Xpos = (cursorX - 669) / 88;  // Scaling Factors ~ these are adjusted to scale the position...
+    var Ypos = (303 - cursorY) / 87;  //... of the position of the mouse click
+
+    geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+    material = new THREE.MeshBasicMaterial({ color: 0x00ff });
+    cube = new THREE.Mesh(geometry, material);
+    cube.position.set(Xpos, Ypos, 0);
+    scene.add(cube);
+
 
 }
 
